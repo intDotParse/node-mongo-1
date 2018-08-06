@@ -6,7 +6,17 @@ MongoClient.connect(dburl, { useNewUrlParser: true }, (err, client) => {
     if (err) throw err;
     console.log('connected to database!');
     const db = client.db(dbname);
-    db.collection('accounts').findOneAndDelete({username:'art123'}).then((result)=>{
+    db.collection('accounts').findOneAndUpdate(
+        {
+            _id:new ObjectID('5b66d3145df0d933303d5a29')
+        },
+        {
+            $set:{status:'inactive'}
+        },
+        {
+            returnOriginal:false
+        }
+    ).then((result)=>{
         console.log(result);
     });
     // db.collection('accounts').deleteOne({username:'art123'}).then((result) => {
